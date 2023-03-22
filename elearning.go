@@ -47,11 +47,15 @@ func EnrolMatakuliah(mn string, mk string, ml string) (InsertedID interface{}) {
 }
 
 func GetDataMatakuliahFromKode(kode string, db *mongo.Database, col string) (data Matakuliah) {
-	user := db.Collection(col)
+	user := MongoConnect("Chapter03").Collection("dbmhs")
 	filter := bson.M{"No Code": kode}
-	err := user.FindOne(context.TODO(), filter).Decode(&data)
+	cursor, err := user.Find(context.TODO(), filter)
 	if err != nil {
-		fmt.Printf("getDataCompFromPhoneNumber: %v\n", err)
+		fmt.Println("GetDataMatakuliahFromKode :", err)
 	}
-	return data
+	err = cursor.All(context.TODO(), &data)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return
 }
