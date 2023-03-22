@@ -1,4 +1,4 @@
-module github.com/raffzhm/elearningbackend
+module github.com/raffzhm/elngbackend
 
 go 1.20
 
