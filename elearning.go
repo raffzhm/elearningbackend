@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -46,3 +46,12 @@ func EnrolMatakuliah(mn string, mk string, ml string) (InsertedID interface{}) {
 	return InsertOneDoc("dbmhs", "matakuliah", matakuliah)
 }
 
+func GetDataMatakuliahFromKode(kode string, db *mongo.Database, col string) (data Matakuliah) {
+	user := db.Collection(col)
+	filter := bson.M{"No Code": kode}
+	err := user.FindOne(context.TODO(), filter).Decode(&data)
+	if err != nil {
+		fmt.Printf("getDataCompFromPhoneNumber: %v\n", err)
+	}
+	return data
+}
