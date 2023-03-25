@@ -11,7 +11,6 @@ func TestRegisterMhs(t *testing.T) {
 	nps := "12345user"
 	hasil := RegisterMhs(nm, em, nps)
 	fmt.Println(hasil)
-
 }
 
 func TestEnrolMatakuliah(t *testing.T) {
@@ -20,5 +19,10 @@ func TestEnrolMatakuliah(t *testing.T) {
 	ml := "Gedung Pendidikan"
 	hasil := EnrolMatakuliah(mn, mk, ml)
 	fmt.Println(hasil)
+}
 
+func TestGetDataMatakuliahFromKode(t *testing.T) {
+	kode := "No Code"
+	data := GetDataMatakuliahFromKode(kode)
+	fmt.Println(data)
 }
