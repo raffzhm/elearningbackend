@@ -46,8 +46,8 @@ func EnrolMatakuliah(mn string, mk string, ml string) (InsertedID interface{}) {
 	return InsertOneDoc("dbmhs", "matakuliah", matakuliah)
 }
 
-func GetDataMatakuliahFromKode(Kode string) (data Matakuliah) {
-	user := MongoConnect("Chapter03").Collection("dbmhs")
+func GetDataMatakuliahFromKode(Kode string) (data []Matakuliah) {
+	user := MongoConnect("dbmhs").Collection("matakuliah")
 	filter := bson.M{"kode": Kode}
 	cursor, err := user.Find(context.TODO(), filter)
 	if err != nil {
